@@ -2,7 +2,7 @@ import sys
 import os
 from tkinter import Tk, filedialog, simpledialog, messagebox, Toplevel, StringVar
 from tkinter import ttk
-import fitz  # PyMuPDF
+import pymupdf
 from PIL import Image
 
 def main():
@@ -41,7 +41,7 @@ def main():
         os.makedirs(output_folder, exist_ok=True)
 
         # === 4. Open PDF with PyMuPDF ===
-        doc = fitz.open(pdf_path)
+        doc = pymupdf.open(pdf_path)
         total_pages = doc.page_count
         if total_pages == 0:
             messagebox.showerror("Error", "No pages found in PDF.")
@@ -64,7 +64,7 @@ def main():
 
         # === Handle user closing the window ===
         def on_close():
-            if messagebox.askyesno("Cancel Conversion", "I dare you to Cancel - Bellatrix Lestrange"):
+            if messagebox.askyesno("Cancel Conversion","Cancel Converting?"):
                 stop_conversion["flag"] = True
                 progress_win.destroy()
 
@@ -73,7 +73,7 @@ def main():
         # === 6. Convert each page to JPG ===
         for i, page in enumerate(doc, start=1):
             if stop_conversion["flag"]:
-                messagebox.showinfo("Cancelled", "HE DARES! HE DARES!")
+                messagebox.showinfo("Cancelled", "Conversion Cancelled")
                 sys.exit(0)
 
             pix = page.get_pixmap(dpi=dpi)

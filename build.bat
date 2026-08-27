@@ -1,0 +1,2 @@
+py -m venv venv
+venv\Scripts\activate && python -m pip install --upgrade pip && pip install pymupdf pyinstaller pillow && pyinstaller --onefile --windowed --clean --name pdftojpg pdf_to_jpg_gui.py && deactivate
