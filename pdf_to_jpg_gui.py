@@ -85,11 +85,12 @@ def main():
             label_var.set(f"Converting page {i} of {total_pages}...")
             progress_win.update()
 
-        progress_win.destroy()
+        
         messagebox.showinfo(
             "Done",
-            f"My Lord! \n{total_pages} page(s) saved to:\n{output_folder}"
+            f"{total_pages} page(s) saved to:\n{output_folder}"
         )
+        progress_win.destroy()
         sys.exit(0)
 
     except Exception as e:
