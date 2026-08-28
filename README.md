@@ -1,4 +1,4 @@
-# PDF to JPG Converter (Windows) 1.0
+# PDF to JPG Converter (Windows)
 Quick and fast way to convert PDF to JPG. Running it from path makes it very quick to use.
 
 ## Install & Use

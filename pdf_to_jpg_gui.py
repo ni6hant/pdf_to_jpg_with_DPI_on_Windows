@@ -36,9 +36,21 @@ def main():
                 root.withdraw()
                 messagebox.showinfo("Cancelled", "No PDF selected. Exiting.")
                 sys.exit(0)
+        #Instead of replacing .pdf with nothing I want to make sure a filename with .pdf not just in the extension is also replaced.
+        # Yes, this might be very unlikely but I don't see a downside to this as a filename will always have the last four characters: .pdf
+
+        pdf_file_new_folder = pdf_path[:-4] 
+        
+        # If there are no folder in the same path with the pdf's file name, create that folder and select that by default for images.
+        # However, if a folder actually exists, don't create a new folder or go inside that folder but just stay in the same folder of the pdf file and let the user decide.
+        # P.S: I am a literal genius for coming up with this.
+        try:
+            os.mkdir(pdf_file_new_folder, mode=0o777)
+        except:
+            pdf_file_new_folder = pdf_path
 
         # === 2. Output folder ===
-        output_folder = filedialog.askdirectory(title="Select output folder",initialdir = get_start_dir())
+        output_folder = filedialog.askdirectory(title="Select output folder",initialdir = pdf_file_new_folder)
         if not output_folder:
             root.withdraw()
             messagebox.showinfo("Cancelled", "No output folder selected. Exiting.")
