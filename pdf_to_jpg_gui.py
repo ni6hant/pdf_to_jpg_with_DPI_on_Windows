@@ -24,12 +24,14 @@ def main():
                 filetypes=[("PDF files", "*.pdf")]
             )
             if not pdf_path:
+                root.withdraw()
                 messagebox.showinfo("Cancelled", "No PDF selected. Exiting.")
                 sys.exit(0)
 
         # === 2. Output folder ===
         output_folder = filedialog.askdirectory(title="Select output folder")
         if not output_folder:
+            root.withdraw()
             messagebox.showinfo("Cancelled", "No output folder selected. Exiting.")
             sys.exit(0)
 
@@ -85,7 +87,7 @@ def main():
             label_var.set(f"Converting page {i} of {total_pages}...")
             progress_win.update()
 
-        
+        root.withdraw()
         messagebox.showinfo(
             "Done",
             f"{total_pages} page(s) saved to:\n{output_folder}"
