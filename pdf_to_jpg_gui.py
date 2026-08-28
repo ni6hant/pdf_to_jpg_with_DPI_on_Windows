@@ -80,7 +80,7 @@ def main():
 
             pix = page.get_pixmap(dpi=dpi)
             img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
-            img.save(os.path.join(output_folder, f"page_{i}.jpg"), "JPEG")
+            img.save(os.path.join(output_folder, f"page_{i:010.0f}.jpg"), "JPEG")
 
             # Update progress
             progress_bar['value'] = i
