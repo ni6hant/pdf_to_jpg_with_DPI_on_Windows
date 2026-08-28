@@ -5,6 +5,14 @@ from tkinter import ttk
 import pymupdf
 from PIL import Image
 
+def get_start_dir() -> str:
+    cwd = os.getcwd()
+    if os.path.isdir(cwd):
+        return cwd
+    if getattr(sys, "frozen", False):
+        return os.path.dirname(sys.executable)
+    return os.path.dirname(os.path.abspath(__file__))
+
 def main():
     root = Tk()
     root.withdraw()
@@ -21,7 +29,8 @@ def main():
         else:
             pdf_path = filedialog.askopenfilename(
                 title="Select a PDF file",
-                filetypes=[("PDF files", "*.pdf")]
+                filetypes=[("PDF files", "*.pdf")],
+                initialdir = get_start_dir()
             )
             if not pdf_path:
                 root.withdraw()
@@ -29,7 +38,7 @@ def main():
                 sys.exit(0)
 
         # === 2. Output folder ===
-        output_folder = filedialog.askdirectory(title="Select output folder")
+        output_folder = filedialog.askdirectory(title="Select output folder",initialdir = get_start_dir())
         if not output_folder:
             root.withdraw()
             messagebox.showinfo("Cancelled", "No output folder selected. Exiting.")
